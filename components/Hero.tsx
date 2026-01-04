@@ -1,13 +1,144 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, TrendingUp, Shield } from 'lucide-react'
+import { 
+  ArrowRight, TrendingUp, Shield, MousePointer, BarChart, Target, Zap, 
+  Code, Globe, Layout, Monitor, FileCode, Phone, 
+  Search, DollarSign, Users, ShoppingCart, Eye, Hand, 
+  Activity, Smartphone, Laptop, Server, 
+  Database, Cloud, Wifi, Link, Share2
+} from 'lucide-react'
+
+interface Particle {
+  size: number
+  left: number
+  top: number
+  duration: number
+  delay: number
+  xOffset: number
+}
+
+interface IconParticle {
+  left: number
+  top: number
+  duration: number
+  delay: number
+  icon: any
+  color: string
+  type: 'google-ads' | 'website'
+}
 
 export default function Hero() {
+  const [particles, setParticles] = useState<Particle[]>([])
+  const [largeParticles, setLargeParticles] = useState<Particle[]>([])
+  const [sparkles, setSparkles] = useState<Array<{ left: number; top: number; duration: number; delay: number }>>([])
+  const [iconParticles, setIconParticles] = useState<IconParticle[]>([])
+
+  useEffect(() => {
+    // Google Ads icons
+    const googleAdsIcons = [
+      { icon: MousePointer, color: '#EA4335' }, // Google Red - Mouse
+      { icon: TrendingUp, color: '#4285F4' }, // Google Blue
+      { icon: BarChart, color: '#FBBC04' }, // Google Yellow
+      { icon: Target, color: '#34A853' }, // Google Green
+      { icon: Zap, color: '#4285F4' },
+      { icon: Search, color: '#EA4335' },
+      { icon: DollarSign, color: '#FBBC04' },
+      { icon: Users, color: '#34A853' },
+      { icon: ShoppingCart, color: '#EA4335' },
+      { icon: Eye, color: '#4285F4' },
+      { icon: Hand, color: '#FBBC04' },
+      { icon: Activity, color: '#34A853' },
+    ]
+    
+    // Website icons
+    const websiteIcons = [
+      { icon: Globe, color: '#3b82f6' }, // Web
+      { icon: Phone, color: '#8b5cf6' }, // Telefon
+      { icon: Code, color: '#06b6d4' },
+      { icon: Layout, color: '#3b82f6' },
+      { icon: Monitor, color: '#8b5cf6' },
+      { icon: FileCode, color: '#06b6d4' },
+      { icon: Smartphone, color: '#3b82f6' },
+      { icon: Laptop, color: '#8b5cf6' },
+      { icon: Server, color: '#06b6d4' },
+      { icon: Database, color: '#3b82f6' },
+      { icon: Cloud, color: '#8b5cf6' },
+      { icon: Wifi, color: '#06b6d4' },
+      { icon: Link, color: '#3b82f6' },
+      { icon: Share2, color: '#8b5cf6' },
+    ]
+    
+    // Generate particles once on mount
+    setParticles(
+      Array.from({ length: 50 }).map(() => ({
+        size: Math.random() * 4 + 2,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: Math.random() * 3 + 2,
+        delay: Math.random() * 2,
+        xOffset: Math.random() * 20 - 10,
+      }))
+    )
+    
+    setLargeParticles(
+      Array.from({ length: 15 }).map(() => ({
+        size: Math.random() * 8 + 4,
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: Math.random() * 4 + 3,
+        delay: Math.random() * 3,
+        xOffset: Math.random() * 40 - 20,
+      }))
+    )
+    
+    setSparkles(
+      Array.from({ length: 20 }).map(() => ({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: Math.random() * 2 + 1,
+        delay: Math.random() * 2,
+      }))
+    )
+    
+    // Generate icon particles
+    const icons: IconParticle[] = []
+    
+    // Google Ads icons - Daha az ve daha az belirgin
+    Array.from({ length: 8 }).forEach(() => {
+      const randomIcon = googleAdsIcons[Math.floor(Math.random() * googleAdsIcons.length)]
+      icons.push({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: Math.random() * 4 + 3,
+        delay: Math.random() * 3,
+        icon: randomIcon.icon,
+        color: randomIcon.color,
+        type: 'google-ads',
+      })
+    })
+    
+    // Website icons - Daha az ve daha az belirgin
+    Array.from({ length: 8 }).forEach(() => {
+      const randomIcon = websiteIcons[Math.floor(Math.random() * websiteIcons.length)]
+      icons.push({
+        left: Math.random() * 100,
+        top: Math.random() * 100,
+        duration: Math.random() * 4 + 3,
+        delay: Math.random() * 3,
+        icon: randomIcon.icon,
+        color: randomIcon.color,
+        type: 'website',
+      })
+    })
+    
+    setIconParticles(icons)
+  }, [])
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Animated Background with CSS */}
-      <div className="absolute inset-0 z-0">
+      {/* Animated Background with Particles */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {/* Gradient Background */}
         <div className="absolute inset-0 bg-gradient-to-br from-background-primary via-background-secondary to-background-primary" />
         
@@ -30,6 +161,144 @@ export default function Hero() {
         <div className="absolute top-20 left-10 w-72 h-72 bg-accent-primary/20 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-secondary/20 rounded-full blur-3xl animate-float-delayed" />
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-accent-primary/10 rounded-full blur-3xl animate-float-slow" />
+        
+        {/* Animated Particles */}
+        {particles.map((particle, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              width: particle.size + 'px',
+              height: particle.size + 'px',
+              left: particle.left + '%',
+              top: particle.top + '%',
+              background: 'rgba(59, 130, 246, 0.6)',
+              boxShadow: '0 0 6px rgba(59, 130, 246, 0.8)',
+            }}
+            animate={{
+              y: [0, -30, 0],
+              x: [0, particle.xOffset, 0],
+              opacity: [0.4, 1, 0.4],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              delay: particle.delay,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+        
+        {/* Larger Glowing Particles */}
+        {largeParticles.map((particle, i) => (
+          <motion.div
+            key={`large-${i}`}
+            className="absolute rounded-full blur-sm"
+            style={{
+              width: particle.size + 'px',
+              height: particle.size + 'px',
+              left: particle.left + '%',
+              top: particle.top + '%',
+              background: 'rgba(59, 130, 246, 0.4)',
+              boxShadow: '0 0 20px rgba(59, 130, 246, 0.6)',
+            }}
+            animate={{
+              y: [0, -50, 0],
+              x: [0, particle.xOffset, 0],
+              opacity: [0.3, 0.8, 0.3],
+              scale: [1, 2, 1],
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              delay: particle.delay,
+              ease: 'easeInOut',
+            }}
+          />
+        ))}
+        
+        {/* Sparkle Particles */}
+        {sparkles.map((sparkle, i) => (
+          <motion.div
+            key={`sparkle-${i}`}
+            className="absolute"
+            style={{
+              left: sparkle.left + '%',
+              top: sparkle.top + '%',
+            }}
+            animate={{
+              scale: [0, 1.5, 0],
+              opacity: [0, 1, 0],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: sparkle.duration,
+              repeat: Infinity,
+              delay: sparkle.delay,
+              ease: 'easeInOut',
+            }}
+          >
+            <div 
+              className="w-1.5 h-1.5 bg-accent-primary rounded-full"
+              style={{
+                boxShadow: '0 0 8px rgba(59, 130, 246, 1)',
+              }}
+            />
+          </motion.div>
+        ))}
+        
+        {/* Google Ads & Website Icon Particles */}
+        {iconParticles.map((iconParticle, i) => {
+          const IconComponent = iconParticle.icon
+          const iconSize = iconParticle.type === 'google-ads' ? 20 : 18
+          return (
+            <motion.div
+              key={`icon-${i}`}
+              className="absolute"
+              style={{
+                left: iconParticle.left + '%',
+                top: iconParticle.top + '%',
+              }}
+              animate={{
+                y: [0, -40, 0],
+                x: [0, iconParticle.type === 'google-ads' ? Math.sin(i) * 15 : Math.cos(i) * 15, 0],
+                opacity: [0.3, 0.6, 0.3],
+                rotate: [0, 360],
+                scale: [0.8, 1.1, 0.8],
+              }}
+              transition={{
+                duration: iconParticle.duration,
+                repeat: Infinity,
+                delay: iconParticle.delay,
+                ease: 'easeInOut',
+              }}
+            >
+              <div 
+                className="relative"
+                style={{
+                  filter: `drop-shadow(0 0 6px ${iconParticle.color}60)`,
+                }}
+              >
+                <div
+                  className="absolute inset-0 blur-lg rounded-full"
+                  style={{
+                    background: iconParticle.color,
+                    opacity: 0.2,
+                  }}
+                />
+                <IconComponent 
+                  size={iconSize}
+                  style={{
+                    color: iconParticle.color,
+                    opacity: 0.7,
+                  }}
+                  className="relative z-10"
+                />
+              </div>
+            </motion.div>
+          )
+        })}
         
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background-primary/50 via-background-primary/30 to-background-primary" />
