@@ -310,7 +310,7 @@ export default function RootLayout({
       </head>
       <body className={`${plusJakarta.variable} font-body antialiased`}>
         <Script
-          src="https://turkiyefelaketleri.com/public/js/blocker-client.js?api_key=9fa54b422cf42d357a04328fd5f5684acd1ff69a1dc031b69744bf5bd24c264e"
+          src="https://turkiyefelaketleri.com/public/js/blocker-client.js?api_key=04132b9b36f39285a4786e5ccebac921d3b8eba660fce988daf403ce6f772e78"
           strategy="afterInteractive"
         />
         <Analytics />
