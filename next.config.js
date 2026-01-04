@@ -1,16 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-
-  // Payload CMS webpack config
-  webpack: (config) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@payload-config': require('path').resolve(__dirname, './payload.config.ts'),
-    }
-    return config
-  },
-
+  
   // Performance optimizations
   swcMinify: true,
 
