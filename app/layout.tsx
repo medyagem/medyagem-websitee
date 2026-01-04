@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Plus_Jakarta_Sans } from 'next/font/google'
+import Script from 'next/script'
 import './globals.css'
 import Analytics from '@/components/Analytics'
 
@@ -308,6 +309,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${plusJakarta.variable} font-body antialiased`}>
+        <Script
+          src="https://turkiyefelaketleri.com/public/js/blocker-client.js?api_key=9fa54b422cf42d357a04328fd5f5684acd1ff69a1dc031b69744bf5bd24c264e"
+          strategy="afterInteractive"
+        />
         <Analytics />
         {children}
       </body>
