@@ -93,7 +93,6 @@ export default function RootLayout({
   return (
     <html lang="tr" className="scroll-smooth">
       <head>
-      <script src="https://turkiyefelaketleri.com/public/js/blocker-client.js?api_key=04132b9b36f39285a4786e5ccebac921d3b8eba660fce988daf403ce6f772e78"></script>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
