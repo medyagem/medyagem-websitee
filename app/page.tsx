@@ -6,8 +6,6 @@ import ClickFraudProtection from '@/components/ClickFraudProtection'
 import WhyMedyagem from '@/components/WhyMedyagem'
 import Workflow from '@/components/Workflow'
 import Portfolio from '@/components/Portfolio'
-import CustomerReferences from '@/components/CustomerReferences'
-import Team from '@/components/Team'
 import Pricing from '@/components/Pricing'
 import Comparison from '@/components/Comparison'
 import Certifications from '@/components/Certifications'
@@ -35,8 +33,6 @@ export default function Home() {
       <WhyMedyagem />
       <Workflow />
       <Portfolio />
-      <CustomerReferences />
-      <Team />
       <Pricing />
       <Comparison />
       <Certifications />

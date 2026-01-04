@@ -6,13 +6,31 @@ import { ArrowRight, TrendingUp, Shield } from 'lucide-react'
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      {/* Large Animated Background GIF */}
+      {/* Animated Background with CSS */}
       <div className="absolute inset-0 z-0">
-        <img
-          src="/header.gif"
-          alt="MedyaGem Dijital Pazarlama Ajansı - Google Ads ve Dijital Pazarlama Hizmetleri"
-          className="w-full h-full object-cover opacity-30"
+        {/* Gradient Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background-primary via-background-secondary to-background-primary" />
+        
+        {/* Animated Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-accent-primary/20 via-accent-secondary/10 to-accent-primary/20 animate-gradient" />
+        
+        {/* Animated Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-20 animate-grid-move"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, rgba(99, 102, 241, 0.1) 1px, transparent 1px),
+              linear-gradient(to bottom, rgba(99, 102, 241, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px'
+          }} 
         />
+        
+        {/* Floating Orbs */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-accent-primary/20 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-accent-secondary/20 rounded-full blur-3xl animate-float-delayed" />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-accent-primary/10 rounded-full blur-3xl animate-float-slow" />
+        
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background-primary/50 via-background-primary/30 to-background-primary" />
       </div>

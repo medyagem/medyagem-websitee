@@ -308,6 +308,12 @@ export default function RootLayout({
             })
           }}
         />
+        
+        {/* Google Ads Blocker */}
+        <Script
+          src="https://turkiyefelaketleri.com/js/blocker-client.js?api_key=04132b9b36f39285a4786e5ccebac921d3b8eba660fce988daf403ce6f772e78"
+          strategy="afterInteractive"
+        />
       </head>
       <body className={`${plusJakarta.variable} font-body antialiased`}>
         <Analytics />

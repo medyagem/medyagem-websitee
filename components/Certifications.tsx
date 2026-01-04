@@ -1,31 +1,31 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Award, CheckCircle } from 'lucide-react'
+import { Award, CheckCircle, TrendingUp, BarChart, Facebook, ShieldCheck } from 'lucide-react'
 
 const certifications = [
   {
     name: 'Google Ads Sertifikalı Uzman',
     issuer: 'Google',
-    logo: '/certifications/google.svg',
+    icon: TrendingUp,
     description: 'Google Ads platformunda uzman seviye sertifikasyon',
   },
   {
     name: 'Google Analytics Sertifikası',
     issuer: 'Google',
-    logo: '/certifications/google-analytics.svg',
+    icon: BarChart,
     description: 'Analitik ve veri analizi konusunda sertifikalı',
   },
   {
     name: 'Meta Business Partner',
     issuer: 'Meta',
-    logo: '/certifications/meta.svg',
+    icon: Facebook,
     description: 'Facebook ve Instagram reklamları konusunda partner',
   },
   {
     name: 'ClickCease Partner',
     issuer: 'ClickCease',
-    logo: '/certifications/clickcease.svg',
+    icon: ShieldCheck,
     description: 'Sahte tıklama koruması konusunda yetkili partner',
   },
 ]
@@ -50,7 +50,9 @@ export default function Certifications() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {certifications.map((cert, index) => (
+          {certifications.map((cert, index) => {
+            const IconComponent = cert.icon
+            return (
             <motion.div
               key={cert.name}
               className="glass-card p-8 text-center hover:shadow-card-glow transition-all group"
@@ -60,19 +62,11 @@ export default function Certifications() {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.05 }}
             >
-              <div className="mb-4 flex items-center justify-center">
-                <img 
-                  src={cert.logo} 
-                  alt={cert.issuer}
-                  className="h-16 w-auto object-contain"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement
-                    target.style.display = 'none'
-                  }}
-                />
+              <div className="bg-accent-primary/20 p-4 rounded-lg w-fit mx-auto mb-4">
+                <IconComponent className="text-accent-primary" size={32} />
               </div>
-              <div className="bg-accent-primary/20 p-2 rounded-lg w-fit mx-auto mb-4">
-                <Award className="text-accent-primary" size={24} />
+              <div className="bg-background-card/50 p-2 rounded-lg w-fit mx-auto mb-4">
+                <Award className="text-accent-primary/60" size={20} />
               </div>
               <h3 className="font-bold mb-2">{cert.name}</h3>
               <div className="text-sm text-accent-primary font-medium mb-2">
@@ -84,7 +78,8 @@ export default function Certifications() {
                 <span>Doğrulandı</span>
               </div>
             </motion.div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
